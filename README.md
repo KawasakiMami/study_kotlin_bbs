@@ -1,0 +1,2 @@
+# stury_kotlin_bbs
+kotlinを勉強しながら掲示板を作ってみる
