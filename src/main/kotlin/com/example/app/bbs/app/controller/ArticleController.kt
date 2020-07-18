@@ -1,0 +1,34 @@
+package com.example.app.bbs.app.controller
+
+import com.example.app.bbs.domain.entity.Article
+import com.example.app.bbs.domain.repository.ArticleRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.*
+
+@Controller
+class ArticleController {
+    @Autowired
+    lateinit var articleRepository: ArticleRepository
+
+    @PostMapping("/")
+    @ResponseBody
+    fun registerArticle(
+        @RequestParam name: String,
+        @RequestParam title: String,
+        @RequestParam contents: String,
+        @RequestParam articleKey: String
+    ): String {
+        articleRepository.save(
+            Article(
+                0,
+                name,
+                title,
+                contents,
+                articleKey
+            )
+        )
+
+        return "Saved"
+    }
+}
