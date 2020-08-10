@@ -5,6 +5,7 @@ import com.example.app.bbs.domain.repository.ArticleRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
+import com.example.app.bbs.app.request.ArticleRequest
 
 @Controller
 class ArticleController {
@@ -13,19 +14,14 @@ class ArticleController {
 
     @PostMapping("/")
     @ResponseBody
-    fun registerArticle(
-        @RequestParam name: String,
-        @RequestParam title: String,
-        @RequestParam contents: String,
-        @RequestParam articleKey: String
-    ): String {
+    fun registerArticle(@ModelAttribute articleRequest: ArticleRequest): String {
         articleRepository.save(
             Article(
-                0,
-                name,
-                title,
-                contents,
-                articleKey
+                articleRequest.id,
+                articleRequest.name,
+                articleRequest.title,
+                articleRequest.contents,
+                articleRequest.articleKey
             )
         )
 
